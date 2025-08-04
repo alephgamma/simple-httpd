@@ -1,11 +1,11 @@
 ---
-- name: Apache VM installation and configuration
+- name: apache installation and configuration
   hosts: all
   gather_facts: yes
   become: yes
   tasks:
 
-  - name: Install Apache packages
+  - name: Install apache package
     ansible.builtin.dnf:
       state: present
       name:
@@ -17,7 +17,7 @@
       enabled: yes
       state: started
 
-  - name: Open Firewall for Apache use
+  - name: Open firewall
     ansible.builtin.firewalld:
       service: http
       permanent: yes
@@ -28,7 +28,18 @@
     ansible.builtin.get_url:
       url: http://www.webpage.com/index.html
       dest: /var/www/html/index.html
+      
+  - name: Create the web page
+    ansible.builtin.copy:
+      dest: /var/www/html/index.html
       mode: 0644
+      content: |
+        <!doctype html>
+        <html>
+          <body>
+            <p>This is an example webpage.</p>
+          </body>
+        </html>
 
   - name: Ensure Apache is running at boot
     ansible.builtin.service:
