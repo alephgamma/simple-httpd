@@ -24,10 +24,10 @@
       immediate: yes
       state: enabled
 
-  - name: Set up web page
-    ansible.builtin.get_url:
-      url: http://www.webpage.com/index.html
-      dest: /var/www/html/index.html
+#  - name: Set up web page
+#    ansible.builtin.get_url:
+#      url: http://www.webpage.com/index.html
+#      dest: /var/www/html/index.html
       
   - name: Create the web page
     ansible.builtin.copy:
